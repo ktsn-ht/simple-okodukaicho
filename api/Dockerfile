@@ -21,5 +21,5 @@ RUN bundle install \
  && echo 'alias be="bundle exec"' >> /home/user/.bashrc
 
 
-# - 新規プロジェクト作成
+# ・新規プロジェクト作成
 # be rails new . -f -d postgresql --skip-turbolinks --skip-test --api
