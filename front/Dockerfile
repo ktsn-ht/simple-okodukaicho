@@ -1,5 +1,5 @@
 FROM node:19.8.1
-WORKDIR /work
+WORKDIR /work/front
 USER node
 
 # ・新規プロジェクト作成
