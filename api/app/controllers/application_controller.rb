@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
     token = JWT.encode(payload, rsa_private, 'RS256')
 
     # CookieにJWTを保存
-    cookies[:token] = token
+    cookies[:token] = { value: token, httponly: true, secure: true }
   end
 
   def verify_jwt
