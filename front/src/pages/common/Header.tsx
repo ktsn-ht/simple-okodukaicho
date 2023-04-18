@@ -1,6 +1,5 @@
-import { FC, memo } from 'react';
-
 import { Button, Flex, Heading, useDisclosure } from '@chakra-ui/react';
+import { FC, memo } from 'react';
 
 import { LoginModal } from '../../components/LoginModal';
 
