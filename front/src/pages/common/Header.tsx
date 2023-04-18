@@ -2,9 +2,14 @@ import { Button, Flex, Heading, useDisclosure } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
 import { LoginModal } from '../../components/LoginModal';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../store/userState';
 
 export const Header: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const userInfo = useRecoilValue(userState);
+  const loggedIn = userInfo ? userInfo.loggedIn : false;
 
   return (
     <>
@@ -30,10 +35,10 @@ export const Header: FC = memo(() => {
           _hover={{ bg: 'cyan.500' }}
           onClick={onOpen}
         >
-          ログイン
+          {loggedIn ? 'マイページ' : 'ログイン'}
         </Button>
       </Flex>
-      <LoginModal isOpen={isOpen} onClose={onClose} />
+      {!loggedIn && <LoginModal isOpen={isOpen} onClose={onClose} />}
     </>
   );
 });

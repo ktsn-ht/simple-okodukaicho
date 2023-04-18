@@ -18,6 +18,8 @@ import { ChangeEvent, FC, memo, useState } from 'react';
 import { postLogin } from '../api/requests/login';
 import { useMessage } from '../hooks/useMessage';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../store/userState';
 
 type Props = {
   isOpen: boolean;
@@ -41,9 +43,12 @@ export const LoginModal: FC<Props> = memo((props) => {
   const navigate = useNavigate();
   const { showMessage } = useMessage();
 
+  const setUserInfo = useSetRecoilState(userState);
+
   const onClickLogin = () => {
     postLogin({ userId: userId, password: password })
       .then(() => {
+        setUserInfo({ loggedIn: true });
         showMessage({ title: 'ログインに成功しました', status: 'success' });
         onClose();
         navigate('/home');
