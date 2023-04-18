@@ -16,6 +16,8 @@ import {
 import { ChangeEvent, FC, memo, useState } from 'react';
 
 import { postLogin } from '../api/requests/login';
+import { useMessage } from '../hooks/useMessage';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   isOpen: boolean;
@@ -36,13 +38,28 @@ export const LoginModal: FC<Props> = memo((props) => {
   const onChangeShowPassword = (e: ChangeEvent<HTMLInputElement>) =>
     setShowPassword(e.target.checked);
 
+  const navigate = useNavigate();
+  const { showMessage } = useMessage();
+
   const onClickLogin = () => {
     postLogin({ userId: userId, password: password })
-      .then((res) => {
-        console.log(res.status);
+      .then(() => {
+        showMessage({ title: 'ログインに成功しました', status: 'success' });
+        onClose();
+        navigate('/home');
       })
       .catch((error) => {
-        console.log(error.response.status);
+        if (error.response.status === 401) {
+          showMessage({
+            title: 'ユーザー名またはパスワードが間違っています',
+            status: 'error',
+          });
+        } else {
+          showMessage({
+            title: '内部エラーが発生しました',
+            status: 'error',
+          });
+        }
       });
   };
 
