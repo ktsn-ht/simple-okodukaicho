@@ -5,6 +5,8 @@ import {
     ModalContent, ModalFooter, ModalOverlay, Stack
 } from '@chakra-ui/react';
 
+import { postLogin } from '../api/requests/login';
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -25,8 +27,13 @@ export const LoginModal: FC<Props> = memo((props) => {
     setShowPassword(e.target.checked);
 
   const onClickLogin = () => {
-    console.log(userId);
-    console.log(password);
+    postLogin({ userId: userId, password: password })
+      .then((res) => {
+        console.log(res.status);
+      })
+      .catch((error) => {
+        console.log(error.response.status);
+      });
   };
 
   return (
