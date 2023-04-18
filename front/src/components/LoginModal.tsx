@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, memo, useState } from 'react';
 
 import {
-    Button, Checkbox, Flex, FormControl, FormLabel, Input, Link, Modal, ModalBody, ModalCloseButton,
+    Button, Checkbox, Flex, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton,
     ModalContent, ModalFooter, ModalOverlay, Stack
 } from '@chakra-ui/react';
 
