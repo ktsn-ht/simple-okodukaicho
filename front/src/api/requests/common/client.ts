@@ -6,3 +6,5 @@ export const client = applyCaseMiddleware(
     baseURL: import.meta.env.VITE_API_ENDPOINT,
   })
 );
+
+client.defaults.withCredentials = true;
