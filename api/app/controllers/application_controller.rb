@@ -29,12 +29,11 @@ class ApplicationController < ActionController::API
     decoded_token = JWT.decode(token, rsa_private, true, { algorithm: 'RS256' })
 
     # JWTに含まれるユーザーIDの検証
-    user_id = decoded_token.first['sub']
-    user = User.find_by(user_id:)
-    raise JWT::DecodeError if user.nil?
+    @user = User.find_by(user_id: decoded_token.first['sub'])
+    raise JWT::DecodeError if @user.nil?
 
     # 検証成功の場合、JWTを更新
-    update_jwt(user_id)
+    update_jwt(@user.user_id)
   rescue JWT::DecodeError, JWT::ExpiredSignature, JWT::VerificationError
     render json: { message: 'jwt error' }, status: :forbidden
   end
