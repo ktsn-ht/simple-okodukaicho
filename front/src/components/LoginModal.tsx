@@ -48,7 +48,7 @@ export const LoginModal: FC<Props> = memo((props) => {
   const onClickLogin = () => {
     postLogin({ userId: userId, password: password })
       .then(() => {
-        setUserInfo({ loggedIn: true });
+        setUserInfo({ loggedIn: true, userId: userId });
         showMessage({ title: 'ログインに成功しました', status: 'success' });
         onClose();
         navigate('/home');
