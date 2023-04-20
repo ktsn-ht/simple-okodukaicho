@@ -12,12 +12,13 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_04_09_143146) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'user_id', null: false
-    t.string 'password_digest', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "users", id: { comment: "ID" }, force: :cascade do |t|
+    t.string "user_id", null: false, comment: "ユーザーID"
+    t.string "password_digest", null: false, comment: "パスワード"
+    t.datetime "created_at", null: false, comment: "作成日時"
+    t.datetime "updated_at", null: false, comment: "更新日時"
   end
+
 end
