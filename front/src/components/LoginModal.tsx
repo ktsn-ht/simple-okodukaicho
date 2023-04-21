@@ -15,18 +15,14 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, memo, useState } from 'react';
 
-import { postLogin } from '../api/requests/login';
-import { useMessage } from '../hooks/useMessage';
-import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { userState } from '../store/userState';
+import { useLogin } from '../hooks/useLogin';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-export const LoginModal: FC<Props> = memo((props) => {
+export const LoginModal: FC<Props> = memo((props: Props) => {
   const { isOpen, onClose } = props;
 
   const [userId, setUserId] = useState('');
@@ -40,33 +36,10 @@ export const LoginModal: FC<Props> = memo((props) => {
   const onChangeShowPassword = (e: ChangeEvent<HTMLInputElement>) =>
     setShowPassword(e.target.checked);
 
-  const navigate = useNavigate();
-  const { showMessage } = useMessage();
+  const { login } = useLogin();
 
-  const setUserInfo = useSetRecoilState(userState);
-
-  const onClickLogin = () => {
-    postLogin({ userId: userId, password: password })
-      .then(() => {
-        setUserInfo({ loggedIn: true, userId: userId });
-        showMessage({ title: 'ログインに成功しました', status: 'success' });
-        onClose();
-        navigate('/home');
-      })
-      .catch((error) => {
-        if (error.response?.status === 401) {
-          showMessage({
-            title: 'ユーザー名またはパスワードが間違っています',
-            status: 'error',
-          });
-        } else {
-          showMessage({
-            title: '内部エラーが発生しました',
-            status: 'error',
-          });
-        }
-      });
-  };
+  const onClickLogin = () =>
+    login({ userId: userId, password: password, onClose: onClose });
 
   return (
     <Modal
@@ -91,6 +64,11 @@ export const LoginModal: FC<Props> = memo((props) => {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={onChangePassword}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    onClickLogin();
+                  }
+                }}
               />
               <Checkbox
                 pt={2}
