@@ -23,7 +23,7 @@ type Props = {
   onClose: () => void;
 };
 
-export const LoginModal: FC<Props> = memo((props: Props) => {
+export const LoginModal: FC<Props> = memo((props) => {
   const { isOpen, onClose } = props;
 
   const [userId, setUserId] = useState('');
