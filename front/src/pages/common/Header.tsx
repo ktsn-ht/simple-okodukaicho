@@ -1,5 +1,5 @@
-import { Button, Flex, Heading, useDisclosure } from '@chakra-ui/react';
 import { FC, memo } from 'react';
+import { Flex, Heading, useDisclosure } from '@chakra-ui/react';
 
 import { HeaderButton } from '../../components/HeaderButton';
 import { LoginModal } from '../../components/LoginModal';
@@ -7,7 +7,23 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../store/userState';
 
 export const Header: FC = memo(() => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenMyPage,
+    onOpen: onOpenMyPage,
+    onClose: onCloseMyPage,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenSignUp,
+    onOpen: onOpenSignUp,
+    onClose: onCloseSignUp,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenLogin,
+    onOpen: onOpenLogin,
+    onClose: onCloseLogin,
+  } = useDisclosure();
 
   const userInfo = useRecoilValue(userState);
   const loggedIn = userInfo ? userInfo.loggedIn : false;
@@ -30,16 +46,16 @@ export const Header: FC = memo(() => {
         </Flex>
         <Flex>
           {loggedIn ? (
-            <HeaderButton text={'マイページ'} onClick={() => {}} />
+            <HeaderButton text={'マイページ'} onClick={onOpenMyPage} />
           ) : (
             <>
-              <HeaderButton text={'ユーザー登録'} onClick={() => {}} />
-              <HeaderButton text={'ログイン'} onClick={onOpen} />
+              <HeaderButton text={'新規登録'} onClick={onOpenSignUp} />
+              <HeaderButton text={'ログイン'} onClick={onOpenLogin} />
             </>
           )}
         </Flex>
       </Flex>
-      {!loggedIn && <LoginModal isOpen={isOpen} onClose={onClose} />}
+      {!loggedIn && <LoginModal isOpen={isOpenLogin} onClose={onCloseLogin} />}
     </>
   );
 });
