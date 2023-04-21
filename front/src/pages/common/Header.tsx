@@ -1,6 +1,7 @@
 import { Button, Flex, Heading, useDisclosure } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 
+import { HeaderButton } from '../../components/HeaderButton';
 import { LoginModal } from '../../components/LoginModal';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../store/userState';
@@ -27,16 +28,16 @@ export const Header: FC = memo(() => {
             シンプルおこづかい帳
           </Heading>
         </Flex>
-        <Button
-          color={'white'}
-          bg={'cyan.600'}
-          mr={'1vw'}
-          fontSize={'sm'}
-          _hover={{ bg: 'cyan.500' }}
-          onClick={onOpen}
-        >
-          {loggedIn ? 'マイページ' : 'ログイン'}
-        </Button>
+        <Flex>
+          {loggedIn ? (
+            <HeaderButton text={'マイページ'} onClick={() => {}} />
+          ) : (
+            <>
+              <HeaderButton text={'ユーザー登録'} onClick={() => {}} />
+              <HeaderButton text={'ログイン'} onClick={onOpen} />
+            </>
+          )}
+        </Flex>
       </Flex>
       {!loggedIn && <LoginModal isOpen={isOpen} onClose={onClose} />}
     </>
