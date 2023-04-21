@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, memo, useState } from 'react';
 
+import { useEnterKey } from '../hooks/useEnterKey';
 import { useLogin } from '../hooks/useLogin';
 
 type Props = {
@@ -37,6 +38,7 @@ export const LoginModal: FC<Props> = memo((props: Props) => {
     setShowPassword(e.target.checked);
 
   const { login } = useLogin();
+  const { pressEnterKey } = useEnterKey();
 
   const onClickLogin = () =>
     login({ userId: userId, password: password, onClose: onClose });
@@ -64,11 +66,9 @@ export const LoginModal: FC<Props> = memo((props: Props) => {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={onChangePassword}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    onClickLogin();
-                  }
-                }}
+                onKeyPress={(e) =>
+                  pressEnterKey({ event: e, process: onClickLogin })
+                }
               />
               <Checkbox
                 pt={2}
