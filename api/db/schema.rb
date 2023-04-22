@@ -15,11 +15,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_22_161317) do
   enable_extension "plpgsql"
 
   create_table "users", id: { comment: "ID" }, force: :cascade do |t|
-    t.string "user_id", default: "", null: false, comment: "ユーザーID"
+    t.string "user_id", limit: 16, default: "", null: false, comment: "ユーザーID"
     t.string "password_digest", default: "", null: false, comment: "パスワード"
     t.datetime "created_at", null: false, comment: "作成日時"
     t.datetime "updated_at", null: false, comment: "更新日時"
-    t.string "email", default: "", null: false, comment: "メールアドレス"
+    t.string "email", limit: 256, default: "", null: false, comment: "メールアドレス"
     t.boolean "temporary_flg", default: true, null: false, comment: "仮登録フラグ"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["user_id"], name: "index_users_on_user_id", unique: true
