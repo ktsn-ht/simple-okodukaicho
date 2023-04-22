@@ -20,7 +20,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_22_161317) do
     t.datetime "created_at", null: false, comment: "作成日時"
     t.datetime "updated_at", null: false, comment: "更新日時"
     t.string "email", default: "", null: false, comment: "メールアドレス"
-    t.boolean "tempolary_flg", default: true, null: false, comment: "仮登録フラグ"
+    t.boolean "temporary_flg", default: true, null: false, comment: "仮登録フラグ"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["user_id"], name: "index_users_on_user_id", unique: true
   end
 
 end
