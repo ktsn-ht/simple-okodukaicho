@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(user_id: params[:user_id])
+    @user = User.find_by(user_id: params[:user_id]) || User.find_by(email: params[:user_id])
     if @user&.authenticate(params[:password])
       update_jwt(@user.user_id)
-      render json: { message: 'login successful', user_id: @user.user_id }, status: :ok
+      render json: { message: 'login succeeded', user_id: @user.user_id }, status: :ok
     else
       render json: { message: 'user not found' }, status: :unauthorized
     end
