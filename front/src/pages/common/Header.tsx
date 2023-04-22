@@ -1,8 +1,8 @@
 import { FC, memo } from 'react';
 import { Flex, Heading, useDisclosure } from '@chakra-ui/react';
 
-import { HeaderButton } from '../../components/HeaderButton';
-import { LoginModal } from '../../components/LoginModal';
+import { HeaderButton } from '../../components/button/HeaderButton';
+import { LoginModal } from '../../components/modal/LoginModal';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../store/userState';
 

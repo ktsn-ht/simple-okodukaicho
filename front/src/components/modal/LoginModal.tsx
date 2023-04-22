@@ -15,8 +15,8 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, memo, useState } from 'react';
 
-import { useEnterKey } from '../hooks/useEnterKey';
-import { useLogin } from '../hooks/useLogin';
+import { useEnterKey } from '../../hooks/useEnterKey';
+import { useLogin } from '../../hooks/useLogin';
 
 type Props = {
   isOpen: boolean;
