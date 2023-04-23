@@ -32,7 +32,7 @@ export const useLogin = () => {
         setUserInfo({ loggedIn: true, userId: userId, email: res.data.email });
         showMessage({ title: 'ログインに成功しました', status: 'success' });
         onClose();
-        navigate('/home');
+        res.data.temporary ? navigate('/sign-up') : navigate('/home');
       })
       .catch(() => {
         showMessage({
