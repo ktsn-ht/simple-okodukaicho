@@ -1,0 +1,15 @@
+<% content_for :content do %>
+  <h1><%= @user.email %>様、シンプルおこづかい帳へようこそ！</h1>
+  <p>
+    シンプルおこづかい帳への仮登録が完了しました。
+    以下のアカウントでログインすることができます。<br>
+  </p>
+  <ul>
+    <li>ユーザーID: <%= @user.email %></li>
+    <li>パスワード: <%= @password %></li>
+  </ul>
+  <p>
+    <a href=<%= @url %>>トップページ</a>右上の「ログイン」ボタンからログインしてください。
+  </p>
+<% end %>
+<%= render template: "layouts/mailer" %>
