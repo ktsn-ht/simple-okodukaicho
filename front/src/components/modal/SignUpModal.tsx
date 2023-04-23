@@ -1,5 +1,5 @@
+import { ChangeEvent, FC, memo, useState } from 'react';
 import {
-    Button,
     Flex,
     FormControl,
     FormLabel,
@@ -12,10 +12,10 @@ import {
     ModalOverlay,
     Stack
 } from '@chakra-ui/react';
-import { ChangeEvent, FC, memo, useState } from 'react';
 
 import { ModalButton } from '../button/ModalButton';
 import { useEnterKey } from '../../hooks/useEnterKey';
+import { useSignUp } from '../../hooks/useSignUp';
 
 type Props = {
   isOpen: boolean;
@@ -30,11 +30,10 @@ export const SignUpModal: FC<Props> = memo((props) => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
 
+  const { signUp } = useSignUp();
   const { pressEnterKey } = useEnterKey();
 
-  const onClickSignUp = () => {
-    alert('test');
-  };
+  const onClickSignUp = () => signUp({ email: email, onClose: onClose });
 
   return (
     <Modal
