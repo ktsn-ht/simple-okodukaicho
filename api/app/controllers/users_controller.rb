@@ -17,5 +17,29 @@ class UsersController < ApplicationController
     render json: { message: 'email invalid' }, status: :bad_request
   end
 
-  def update; end
+  def update
+    @user = User.find(params[:id])
+
+    # ユーザーID・パスワードを更新
+    @user.user_id = params[:user_id]
+    @user.password = params[:password]
+
+    # 仮登録フラグをfalseに更新
+    @user.temporary_flg = false
+    @user.save!
+
+    render json: { message: 'registration scceeded' }, status: :ok
+  rescue ActiveRecord::RecordInvalid => e
+    render json: update_ng_response(e), status: :bad_request
+  end
+
+  private
+
+  def update_ng_response(error)
+    {
+      message: 'invalid parameters',
+      param: error.record.errors.first.attribute.to_s,
+      type: error.record.errors.first.type.to_s
+    }
+  end
 end
