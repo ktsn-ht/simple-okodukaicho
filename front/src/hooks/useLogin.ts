@@ -34,18 +34,11 @@ export const useLogin = () => {
         onClose();
         navigate('/home');
       })
-      .catch((error) => {
-        if (error.response?.status === 401) {
-          showMessage({
-            title: 'ユーザー名またはパスワードが間違っています',
-            status: 'error',
-          });
-        } else {
-          showMessage({
-            title: '内部エラーが発生しました',
-            status: 'error',
-          });
-        }
+      .catch(() => {
+        showMessage({
+          title: 'ユーザー名またはパスワードが間違っています',
+          status: 'error',
+        });
       });
   };
 
