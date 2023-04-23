@@ -19,9 +19,17 @@ export const useLogin = () => {
   const login = (props: Props) => {
     const { userId, password, onClose } = props;
 
+    if (userId === '' || password === '') {
+      showMessage({
+        title: 'ユーザー名・パスワードは必ず入力してください',
+        status: 'error',
+      });
+      return;
+    }
+
     postLogin({ userId: userId, password: password })
-      .then(() => {
-        setUserInfo({ loggedIn: true, userId: userId });
+      .then((res) => {
+        setUserInfo({ loggedIn: true, userId: userId, email: res.data.email });
         showMessage({ title: 'ログインに成功しました', status: 'success' });
         onClose();
         navigate('/home');
