@@ -1,5 +1,5 @@
+import { ChangeEvent, FC, memo, useState } from 'react';
 import {
-    Button,
     Checkbox,
     Flex,
     FormControl,
@@ -13,8 +13,8 @@ import {
     ModalOverlay,
     Stack
 } from '@chakra-ui/react';
-import { ChangeEvent, FC, memo, useState } from 'react';
 
+import { ModalButton } from '../button/ModalButton';
 import { useEnterKey } from '../../hooks/useEnterKey';
 import { useLogin } from '../../hooks/useLogin';
 
@@ -84,16 +84,7 @@ export const LoginModal: FC<Props> = memo((props) => {
         </ModalBody>
         <ModalFooter>
           <Flex w={'100vw'} align={'center'} justify={'center'}>
-            <Button
-              color={'white'}
-              bg={'cyan.600'}
-              mr={'1vw'}
-              fontSize={'sm'}
-              _hover={{ bg: 'cyan.500' }}
-              onClick={onClickLogin}
-            >
-              ログイン
-            </Button>
+            <ModalButton text={'ログイン'} onClick={onClickLogin} />
           </Flex>
         </ModalFooter>
       </ModalContent>
