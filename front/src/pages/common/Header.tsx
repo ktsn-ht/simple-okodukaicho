@@ -3,6 +3,7 @@ import { Flex, Heading, useDisclosure } from '@chakra-ui/react';
 
 import { HeaderButton } from '../../components/button/HeaderButton';
 import { LoginModal } from '../../components/modal/LoginModal';
+import { SignUpModal } from '../../components/modal/SignUpModal';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../store/userState';
 
@@ -55,7 +56,8 @@ export const Header: FC = memo(() => {
           )}
         </Flex>
       </Flex>
-      {!loggedIn && <LoginModal isOpen={isOpenLogin} onClose={onCloseLogin} />}
+      <SignUpModal isOpen={isOpenSignUp} onClose={onCloseSignUp} />
+      <LoginModal isOpen={isOpenLogin} onClose={onCloseLogin} />
     </>
   );
 });
