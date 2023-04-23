@@ -1,3 +1,3 @@
-export type postSignUpParams = {
+export type postUsersParams = {
   email: string;
 };

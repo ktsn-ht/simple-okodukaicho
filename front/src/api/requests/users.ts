@@ -1,6 +1,6 @@
 import { client } from './common/client';
-import { postSignUpParams } from '../params/signUpParams';
+import { postUsersParams } from '../params/usersParams';
 
-export const postSignUp = (params: postSignUpParams) => {
-  return client.post('/sign-up', params);
+export const postUsers = (params: postUsersParams) => {
+  return client.post('/users', params);
 };

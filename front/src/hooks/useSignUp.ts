@@ -1,4 +1,4 @@
-import { postSignUp } from '../api/requests/signUp';
+import { postUsers } from '../api/requests/users';
 import { useMessage } from './useMessage';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
@@ -26,7 +26,7 @@ export const useSignUp = () => {
       return;
     }
 
-    postSignUp({ email: email })
+    postUsers({ email: email })
       .then(() => {
         setUserInfo({ loggedIn: false, userId: '', email: email });
         showMessage({ title: '仮登録メールを送信しました', status: 'info' });
