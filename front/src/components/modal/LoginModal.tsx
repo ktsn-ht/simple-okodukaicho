@@ -57,7 +57,7 @@ export const LoginModal: FC<Props> = memo((props) => {
         <ModalBody mx={4}>
           <Stack spacing={4}>
             <FormControl>
-              <FormLabel>ユーザーID</FormLabel>
+              <FormLabel>ユーザーID または メールアドレス</FormLabel>
               <Input value={userId} onChange={onChangeUserId} />
             </FormControl>
             <FormControl>
