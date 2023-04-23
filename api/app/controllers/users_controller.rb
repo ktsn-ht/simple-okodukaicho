@@ -16,4 +16,6 @@ class UsersController < ApplicationController
   rescue ActiveRecord::RecordInvalid
     render json: { message: 'email invalid' }, status: :bad_request
   end
+
+  def update; end
 end
