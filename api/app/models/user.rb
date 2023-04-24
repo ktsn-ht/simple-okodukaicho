@@ -19,4 +19,12 @@ class User < ApplicationRecord
 
     tmp_password
   end
+
+  # ユーザーID・パスワード・仮登録フラグの更新
+  def update!(params)
+    self.user_id = params[:user_id]
+    self.password = params[:new_password]
+    self.temporary_flg = false
+    save!
+  end
 end

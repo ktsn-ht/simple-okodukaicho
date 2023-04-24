@@ -20,17 +20,17 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    # ユーザーID・パスワードを更新
-    @user.user_id = params[:user_id]
-    @user.password = params[:password]
+    # 現パスワードで認証失敗した場合はエラー
+    raise StandardError unless @user&.authenticate(params[:password])
 
-    # 仮登録フラグをfalseに更新
-    @user.temporary_flg = false
-    @user.save!
+    # ユーザーID・パスワード・仮登録フラグの更新
+    @user.update!(params)
 
     render json: { message: 'registration scceeded' }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render json: update_ng_response(e), status: :bad_request
+  rescue StandardError
+    render json: { message: 'password wrong' }, status: :unauthorized
   end
 
   private
