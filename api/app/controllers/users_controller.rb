@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     # ユーザーID・パスワード・仮登録フラグの更新
     @user.update!(params)
 
-    render json: { message: 'registration scceeded' }, status: :ok
+    render json: update_ok_response, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render json: update_ng_response(e), status: :bad_request
   rescue StandardError
@@ -31,6 +31,15 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def update_ok_response
+    {
+      message: 'registration scceeded',
+      user_id: @user.user_id,
+      email: @user.email,
+      temporary: @user.temporary_flg
+    }
+  end
 
   def update_ng_response(error)
     {
