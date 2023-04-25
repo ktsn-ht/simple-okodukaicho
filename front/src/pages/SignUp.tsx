@@ -2,6 +2,7 @@ import {
     Box,
     Button,
     FormControl,
+    FormHelperText,
     FormLabel,
     Input,
     Stack,
@@ -11,6 +12,7 @@ import {
 import { ChangeEvent, FC, memo, useState } from 'react';
 
 import { ConfirmationModal } from '../components/modal/ConfirmationModal';
+import { useRegistAccount } from '../hooks/useRegistAccount';
 
 export const SignUp: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,7 +34,15 @@ export const SignUp: FC = memo(() => {
   const onChangeShowNewPassword = (e: ChangeEvent<HTMLInputElement>) =>
     setShowNewPassword(e.target.checked);
 
-  const onClickRegistAccount = () => {};
+  const { registAccount } = useRegistAccount();
+
+  const onClickRegistAccount = () =>
+    registAccount({
+      userId: userId,
+      password: password,
+      newPassword: newPassword,
+      onClose: onClose,
+    });
 
   return (
     <>
@@ -44,7 +54,11 @@ export const SignUp: FC = memo(() => {
       >
         <Stack w={'60%'} spacing={8}>
           <FormControl>
-            <FormLabel fontWeight={'bold'}>ユーザーID</FormLabel>
+            <FormLabel fontWeight={'bold'}>新しいユーザーID</FormLabel>
+            <FormHelperText>
+              英小文字または数字を含む<b>16文字以内</b>
+              で入力してください
+            </FormHelperText>
             <Input bg={'white'} value={userId} onChange={onChangeUserId} />
           </FormControl>
           <FormControl>
@@ -61,6 +75,10 @@ export const SignUp: FC = memo(() => {
           </FormControl>
           <FormControl>
             <FormLabel fontWeight={'bold'}>新しいパスワード</FormLabel>
+            <FormHelperText>
+              英数字または記号を含む<b>8文字以上</b>
+              で入力してください
+            </FormHelperText>
             <Input
               bg={'white'}
               type={showNewPassword ? 'text' : 'password'}
