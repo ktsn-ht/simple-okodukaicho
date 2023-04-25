@@ -9,17 +9,6 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  def set_temporary_user_id
-    self.user_id = email.gsub(/[^a-z0-9]/, '')[..15]
-  end
-
-  def set_temporary_password
-    tmp_password = SecureRandom.alphanumeric(10)
-    self.password = tmp_password
-
-    tmp_password
-  end
-
   # ユーザーID・パスワード・仮登録フラグの更新
   def update!(params)
     self.user_id = params[:user_id]

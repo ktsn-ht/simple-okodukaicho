@@ -2,15 +2,14 @@ class UsersController < ApplicationController
   skip_before_action :verify_jwt, only: [:create]
 
   def create
-    @user = User.new(email: params[:email])
+    # 仮のユーザーID・パスワードを発行
+    tmp_user_id = "user#{Time.zone.now.strftime('%N')}"
+    tmp_password = SecureRandom.alphanumeric(10)
 
-    # 一時的なユーザーID・パスワードを発行してDBに保存
-    @user.set_temporary_user_id
-    @password = @user.set_temporary_password
-    @user.save!
+    @user = User.create!(user_id: tmp_user_id, email: params[:email], password: tmp_password)
 
     # 仮登録完了メールを送信
-    UserMailer.with(user: @user, password: @password).sign_up_email.deliver_later
+    UserMailer.with(user: @user, password: tmp_password).sign_up_email.deliver_later
 
     render json: { message: 'sign up scceeded' }, status: :ok
   rescue ActiveRecord::RecordInvalid
