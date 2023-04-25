@@ -13,11 +13,11 @@ import { FC, memo } from 'react';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  onClick: () => void;
+  confirm: () => void;
 };
 
 export const ConfirmationModal: FC<Props> = memo((props) => {
-  const { isOpen, onClose, onClick } = props;
+  const { isOpen, onClose, confirm } = props;
 
   return (
     <Modal
@@ -31,7 +31,7 @@ export const ConfirmationModal: FC<Props> = memo((props) => {
       <ModalContent>
         <ModalHeader>登録の確認</ModalHeader>
         <ModalBody mx={4}>
-          入力された内容で登録します。よろしいですか？
+          入力した内容で本登録をおこないます。よろしいですか？
         </ModalBody>
         <ModalFooter>
           <Box
@@ -47,7 +47,7 @@ export const ConfirmationModal: FC<Props> = memo((props) => {
               mr={'2%'}
               fontSize={'sm'}
               _hover={{ bg: 'cyan.500' }}
-              onClick={onClick}
+              onClick={confirm}
             >
               確認
             </Button>
