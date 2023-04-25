@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(user_id: params[:user_id]) || User.find_by(email: params[:user_id])
     if @user&.authenticate(params[:password])
-      update_jwt(@user.user_id)
+      update_jwt(@user.id)
       render json: create_ok_response, status: :ok
     else
       render json: { message: 'user not found' }, status: :unauthorized
