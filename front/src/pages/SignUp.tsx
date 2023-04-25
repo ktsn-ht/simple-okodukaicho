@@ -60,7 +60,7 @@ export const SignUp: FC = memo(() => {
             </Switch>
           </FormControl>
           <FormControl>
-            <FormLabel fontWeight={'bold'}>変更後のパスワード</FormLabel>
+            <FormLabel fontWeight={'bold'}>新しいパスワード</FormLabel>
             <Input
               bg={'white'}
               type={showNewPassword ? 'text' : 'password'}
@@ -87,7 +87,7 @@ export const SignUp: FC = memo(() => {
       <ConfirmationModal
         isOpen={isOpen}
         onClose={onClose}
-        onClick={onClickRegistAccount}
+        confirm={onClickRegistAccount}
       />
     </>
   );
