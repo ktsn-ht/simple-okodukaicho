@@ -17,8 +17,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-
     # 現パスワードで認証失敗した場合はエラー
     raise StandardError unless @user&.authenticate(params[:password])
 
