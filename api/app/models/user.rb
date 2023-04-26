@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :income_expenses, dependent: :destroy
+  has_many :categories, dependent: :destroy
+
   before_validation { self.email = email.downcase }
 
   validates :user_id, presence: true, length: { maximum: 16 }, uniqueness: true,

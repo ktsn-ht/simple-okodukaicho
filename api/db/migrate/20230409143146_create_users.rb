@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration[7.0]
   def change
-    create_table :users do |t|
+    create_table :users, comment: 'ユーザー' do |t|
       t.string :user_id, null: false, default: '', limit: 16, comment: 'ユーザーID'
       t.string :password_digest, null: false, default: '', comment: 'パスワード'
 
