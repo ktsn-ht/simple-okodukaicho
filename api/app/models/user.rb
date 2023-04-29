@@ -12,14 +12,16 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  # ユーザーID・パスワード・仮登録フラグの更新
-  def update!(params)
-    # 仮登録から本登録である場合、初期の収支カテゴリーを作成
-    Category.initial_create(self) if temporary_flg
+  # 本登録
+  def regist!(params)
+    # ユーザーID・パスワード・仮登録フラグの更新
+    update!(
+      user_id: params[:user_id],
+      password: params[:new_password],
+      temporary_flg: false
+    )
 
-    self.user_id = params[:user_id]
-    self.password = params[:new_password]
-    self.temporary_flg = false
-    save!
+    # 初期の収支カテゴリーを作成
+    Category.initial_create(self)
   end
 end

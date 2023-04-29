@@ -20,8 +20,8 @@ class UsersController < ApplicationController
     # 現パスワードで認証失敗した場合はエラー
     raise StandardError unless @user&.authenticate(params[:password])
 
-    # ユーザーID・パスワード・仮登録フラグの更新
-    @user.update!(params)
+    # 本登録
+    @user.regist!(params)
 
     render json: update_ok_response, status: :ok
   rescue ActiveRecord::RecordInvalid => e
