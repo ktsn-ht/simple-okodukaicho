@@ -14,6 +14,9 @@ class User < ApplicationRecord
 
   # ユーザーID・パスワード・仮登録フラグの更新
   def update!(params)
+    # 仮登録から本登録である場合、初期の収支カテゴリーを作成
+    Category.initial_create(self) if temporary_flg
+
     self.user_id = params[:user_id]
     self.password = params[:new_password]
     self.temporary_flg = false
