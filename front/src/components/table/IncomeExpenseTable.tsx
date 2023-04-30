@@ -19,19 +19,19 @@ export const IncomeExpenseTable: FC<Props> = memo((props) => {
   return (
     <TableContainer display={'flex'} justifyContent={'center'}>
       <Table
-        width={{ base: '80%', md: '60%' }}
+        width={{ base: '90%', md: '80%' }}
         backgroundColor={'white'}
         borderRadius={'lg'}
       >
         <Thead>
           <Tr>
-            <Th width={'25%'} borderRightWidth={'1px'}>
+            <Th width={'20%'} borderRightWidth={'1px'}>
               日付
             </Th>
-            <Th width={'50%'} borderRightWidth={'1px'}>
+            <Th width={'40%'} borderRightWidth={'1px'}>
               用途
             </Th>
-            <Th width={'25%'}>金額（円）</Th>
+            <Th width={'40%'}>金額（円）</Th>
           </Tr>
         </Thead>
         <Tbody>
