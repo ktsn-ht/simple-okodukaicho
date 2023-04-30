@@ -29,6 +29,7 @@ class IncomeExpense < ApplicationRecord
       filtered_income_expenses = where(user:, date: date_range, category: categories).order(date: :desc)
       filtered_income_expenses.map do |income_expense|
         {
+          id: income_expense.id,
           date: income_expense.date,
           category_name: income_expense.category.name,
           memo: income_expense.memo,
