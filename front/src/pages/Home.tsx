@@ -51,7 +51,7 @@ export const Home: FC = memo(() => {
     >
       <Stack spacing={8}>
         <Heading textAlign={'center'}>{`${year}年${month}月`}</Heading>
-        <Flex w={'100vw'} align={'center'} justify={'center'}>
+        <Flex w={'100%'} align={'center'} justify={'center'}>
           <Button
             color={'white'}
             bg={'cyan.600'}
@@ -61,7 +61,7 @@ export const Home: FC = memo(() => {
             収支を入力する
           </Button>
         </Flex>
-        <Tabs align={'center'} isFitted={true}>
+        <Tabs w={'100vw'} align={'center'} isFitted={true}>
           <TabList>
             <Tab>一覧</Tab>
             <Tab>収入</Tab>
