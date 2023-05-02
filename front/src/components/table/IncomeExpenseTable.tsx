@@ -1,16 +1,5 @@
+import { Box, Flex, Table, Tag, Tbody, Td, Th, Thead, Tooltip, Tr } from '@chakra-ui/react';
 import { FC, memo } from 'react';
-import {
-    Flex,
-    Table,
-    TableContainer,
-    Tag,
-    Tbody,
-    Td,
-    Th,
-    Thead,
-    Tooltip,
-    Tr
-} from '@chakra-ui/react';
 
 type Props = {
   incomeExpenses: IncomeExpense[];
@@ -28,12 +17,8 @@ export const IncomeExpenseTable: FC<Props> = memo((props) => {
   const { incomeExpenses } = props;
 
   return (
-    <TableContainer display={'flex'} justifyContent={'center'}>
-      <Table
-        width={{ base: '100%', md: '80%' }}
-        backgroundColor={'white'}
-        borderRadius={'lg'}
-      >
+    <Box h={'30vh'} w={{ base: '100%', md: '80%' }} overflowY={'scroll'}>
+      <Table backgroundColor={'white'} borderRadius={'lg'}>
         <Thead>
           <Tr>
             <Th width={{ base: '10%', md: '20%' }} borderRightWidth={'1px'}>
@@ -69,7 +54,7 @@ export const IncomeExpenseTable: FC<Props> = memo((props) => {
           ))}
         </Tbody>
       </Table>
-    </TableContainer>
+    </Box>
   );
 });
 
