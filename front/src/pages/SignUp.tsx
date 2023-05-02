@@ -48,7 +48,6 @@ export const SignUp: FC = memo(() => {
     <>
       <Box
         display="flex"
-        h={'100vh'}
         justifyContent={'center'}
         padding={{ base: 3, md: 5 }}
       >

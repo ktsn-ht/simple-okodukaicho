@@ -43,12 +43,7 @@ export const Home: FC = memo(() => {
   }, [setTableData]);
 
   return (
-    <Box
-      display="flex"
-      h={'100vh'}
-      justifyContent={'center'}
-      padding={{ base: 3, md: 5 }}
-    >
+    <Box display="flex" justifyContent={'center'} padding={{ base: 3, md: 5 }}>
       <Stack spacing={8}>
         <Heading textAlign={'center'}>{`${year}年${month}月`}</Heading>
         <Flex w={'100%'} align={'center'} justify={'center'}>
