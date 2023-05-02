@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { HeaderLayout } from '../pages/layout/HeaderLayout';
@@ -12,13 +12,17 @@ import { userState } from '../store/userState';
 export const Router: FC = memo(() => {
   const setUserInfo = useSetRecoilState(userState);
 
-  // getLogin()
-  //   .then((res) => {
-  //     setUserInfo({ loggedIn: true, userId: res.data.userId });
-  //   })
-  //   .catch(() => {
-  //     setUserInfo({ loggedIn: false, userId: '' });
-  //   });
+  getLogin()
+    .then((res) => {
+      setUserInfo({
+        loggedIn: true,
+        userId: res.data.userId,
+        email: res.data.email,
+      });
+    })
+    .catch(() => {
+      setUserInfo({ loggedIn: false, userId: '', email: '' });
+    });
 
   return (
     <Routes>
