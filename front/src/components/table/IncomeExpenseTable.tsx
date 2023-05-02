@@ -17,17 +17,31 @@ export const IncomeExpenseTable: FC<Props> = memo((props) => {
   const { incomeExpenses } = props;
 
   return (
-    <Box h={'30vh'} w={{ base: '100%', md: '80%' }} overflowY={'scroll'}>
-      <Table backgroundColor={'white'} borderRadius={'lg'}>
+    <Box h={'40vh'} w={{ base: '100%', md: '80%' }} overflowY={'scroll'}>
+      <Table
+        backgroundColor={'white'}
+        borderRadius={'lg'}
+        position={'relative'}
+      >
         <Thead>
-          <Tr>
-            <Th width={{ base: '10%', md: '20%' }} borderRightWidth={'1px'}>
+          <Tr position={'sticky'} top={0} zIndex={1}>
+            <Th
+              width={{ base: '10%', md: '20%' }}
+              backgroundColor={'white'}
+              borderRightWidth={'1px'}
+            >
               日付
             </Th>
-            <Th width={{ base: '50%', md: '40%' }} borderRightWidth={'1px'}>
+            <Th
+              width={{ base: '50%', md: '40%' }}
+              backgroundColor={'white'}
+              borderRightWidth={'1px'}
+            >
               用途
             </Th>
-            <Th width={'40%'}>金額（円）</Th>
+            <Th width={'40%'} backgroundColor={'white'}>
+              金額（円）
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
