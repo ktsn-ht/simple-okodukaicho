@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :verify_jwt, only: [:create]
 
   def new
-    render json: { message: 'login authenticated', user_id: @user.user_id }, status: :ok
+    render json: { message: 'login authenticated', user_id: @user.user_id, email: @user.email }, status: :ok
   end
 
   def create
