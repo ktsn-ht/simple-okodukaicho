@@ -10,21 +10,25 @@ import {
     TabPanels,
     Tabs
 } from '@chakra-ui/react';
-import { FC, memo, useCallback, useEffect, useState } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 
 import { IncomeExpenseTable } from '../components/table/IncomeExpenseTable';
 import { getIncomeExpenses } from '../api/requests/incomeExpenses';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../store/userState';
 
 export const Home: FC = memo(() => {
   const date = new Date();
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth() + 1);
 
+  const userInfo = useRecoilValue(userState);
+
   const [incomeExpenses, setIncomeExpenses] = useState([]);
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
 
-  const setTableData = useCallback(() => {
+  useEffect(() => {
     getIncomeExpenses({
       params: {
         date: `${year}-${month}-1`,
@@ -36,11 +40,7 @@ export const Home: FC = memo(() => {
         setExpenses(res.data.expenses);
       })
       .catch();
-  }, [year, month]);
-
-  useEffect(() => {
-    setTableData();
-  }, [setTableData]);
+  }, [year, month, userInfo]);
 
   return (
     <Box display="flex" justifyContent={'center'} padding={{ base: 3, md: 5 }}>
@@ -62,7 +62,6 @@ export const Home: FC = memo(() => {
             <Tab>収入</Tab>
             <Tab>支出</Tab>
           </TabList>
-
           <TabPanels>
             <TabPanel>
               <IncomeExpenseTable incomeExpenses={incomeExpenses} />
