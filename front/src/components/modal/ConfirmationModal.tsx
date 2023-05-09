@@ -23,13 +23,13 @@ export const ConfirmationModal: FC<Props> = memo((props) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      size={'md'}
+      size={'lg'}
       autoFocus={false}
       motionPreset="slideInBottom"
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>登録の確認</ModalHeader>
+        <ModalHeader textAlign={'center'}>登録の確認</ModalHeader>
         <ModalBody mx={4}>
           入力した内容で本登録をおこないます。よろしいですか？
         </ModalBody>
