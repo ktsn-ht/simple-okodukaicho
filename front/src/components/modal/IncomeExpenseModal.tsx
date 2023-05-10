@@ -2,6 +2,8 @@ import {
     Button,
     Flex,
     FormControl,
+    FormLabel,
+    Input,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -78,7 +80,7 @@ export const IncomeExpenseModal: FC<Props> = memo((props) => {
               </Flex>
             </FormControl>
             <FormControl>
-              <Flex alignItems={'center'} justifyContent="center">
+              <Flex alignItems={'center'} justifyContent="center" mb={'5%'}>
                 <Button
                   isActive={incomeFlg}
                   w={'50%'}
@@ -109,10 +111,53 @@ export const IncomeExpenseModal: FC<Props> = memo((props) => {
                 </Button>
               </Flex>
             </FormControl>
+            <FormControl>
+              <Flex align={'center'} mb={'3%'}>
+                <FormLabel w={'10%'}>用途</FormLabel>
+                <Select>
+                  <option>食費</option>
+                  <option>給与</option>
+                </Select>
+              </Flex>
+            </FormControl>
+            <FormControl>
+              <Flex align={'center'} mb={'3%'}>
+                <FormLabel w={'10%'}>メモ</FormLabel>
+                <Input />
+              </Flex>
+            </FormControl>
+            <FormControl>
+              <Flex align={'center'} mb={'3%'}>
+                <FormLabel w={'10%'}>金額</FormLabel>
+                <Input mr={'2%'} />円
+              </Flex>
+            </FormControl>
           </Stack>
         </ModalBody>
         <ModalFooter>
-          <Flex w={'100vw'} align={'center'} justify={'center'}></Flex>
+          <Flex w={'100vw'} align={'center'} justify={'center'}>
+            <Button
+              w={'40%'}
+              color={'white'}
+              bg={'cyan.600'}
+              mr={'2%'}
+              fontSize={'sm'}
+              _hover={{ bg: 'cyan.500' }}
+            >
+              入力
+            </Button>
+            <Button
+              w={'40%'}
+              color={'white'}
+              bg={'red.600'}
+              ml={'2%'}
+              fontSize={'sm'}
+              _hover={{ bg: 'red.500' }}
+              onClick={onClose}
+            >
+              キャンセル
+            </Button>
+          </Flex>
         </ModalFooter>
       </ModalContent>
     </Modal>
