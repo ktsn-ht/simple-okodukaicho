@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   put    'users'           => 'users#update'
 
   get    'income-expenses' => 'income_expenses#index'
+  post   'income-expenses' => 'income_expenses#create'
 end

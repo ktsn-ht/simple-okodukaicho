@@ -5,4 +5,17 @@ class IncomeExpensesController < ApplicationController
 
     render json: { income_expenses:, incomes:, expenses: }
   end
+
+  def create
+    category = Category.find_by(user: @user, name: params[:category])
+    raise StandardError if category.nil?
+
+    IncomeExpense.create!(amount: params[:amount], date: params[:date], memo: params[:memo], user: @user, category:)
+
+    render json: { message: 'create income_expense succeeded' }, status: :ok
+  rescue ActiveRecord::RecordInvalid
+    render json: { message: 'income_expense params invalid' }, status: :bad_request
+  rescue StandardError
+    render json: { message: 'category params invalid' }, status: :bad_request
+  end
 end
