@@ -3,3 +3,10 @@ export type getIncomeExpensesParams = {
     date: string;
   };
 };
+
+export type postIncomeExpensesParams = {
+  category: string;
+  amount: number;
+  date: string;
+  memo: string;
+};
