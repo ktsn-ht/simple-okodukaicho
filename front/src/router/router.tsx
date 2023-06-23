@@ -1,12 +1,12 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
-import { HeaderLayout } from '../pages/layout/HeaderLayout';
+import { getLogin } from '../api/requests/login';
 import { Home } from '../pages/Home';
+import { HeaderLayout } from '../pages/layout/HeaderLayout';
 import { SignUp } from '../pages/SignUp';
 import { Top } from '../pages/Top';
-import { getLogin } from '../api/requests/login';
-import { useSetRecoilState } from 'recoil';
 import { userState } from '../store/userState';
 
 export const Router: FC = memo(() => {
@@ -26,9 +26,9 @@ export const Router: FC = memo(() => {
 
   return (
     <Routes>
-      <Route path="/" element={<HeaderLayout childlen={<Top />} />} />
-      <Route path="/home" element={<HeaderLayout childlen={<Home />} />} />
-      <Route path="/sign-up" element={<HeaderLayout childlen={<SignUp />} />} />
+      <Route path="/" element={<HeaderLayout children={<Top />} />} />
+      <Route path="/home" element={<HeaderLayout children={<Home />} />} />
+      <Route path="/sign-up" element={<HeaderLayout children={<SignUp />} />} />
       <Route path="*" element={<div>error</div>} />
     </Routes>
   );
