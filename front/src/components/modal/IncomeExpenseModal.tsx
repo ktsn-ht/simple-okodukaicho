@@ -1,23 +1,13 @@
-import {
-    Button,
-    Flex,
-    FormControl,
-    FormLabel,
-    Input,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    Select,
-    Stack
-} from '@chakra-ui/react';
 import React, { FC, memo, useState } from 'react';
+
+import {
+    Button, Flex, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent,
+    ModalFooter, ModalHeader, ModalOverlay, Select, Stack, Text
+} from '@chakra-ui/react';
 
 import { useEnterKey } from '../../hooks/useEnterKey';
 import { useInputIncomeExpense } from '../../hooks/useInputIncomeExpense';
+import { DateSelect } from '../select/DateSelect';
 
 type Props = {
   isOpen: boolean;
@@ -82,44 +72,33 @@ export const IncomeExpenseModal: FC<Props> = memo((props) => {
           <Stack spacing={4}>
             <FormControl mb={'5%'}>
               <Flex>
-                <Select
-                  defaultValue={year}
-                  size={'xs'}
-                  w={'40%'}
-                  mr={'2%'}
+                <DateSelect
+                  defaultValue={date.getFullYear()}
+                  width={'40%'}
                   onChange={inputYear}
-                >
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                </Select>
-                年
-                <Select
-                  defaultValue={month}
-                  size={'xs'}
-                  w={'20%'}
-                  mr={'2%'}
-                  ml={'5%'}
+                  choices={yearChoices(date.getFullYear())}
+                />
+                <Text mt={'1%'} mr={'5%'} ml={'2%'}>
+                  年
+                </Text>
+                <DateSelect
+                  defaultValue={date.getMonth() + 1}
+                  width={'20%'}
                   onChange={inputMonth}
-                >
-                  <option value="6">6</option>
-                  <option value="5">5</option>
-                  <option value="4">4</option>
-                </Select>
-                月
-                <Select
-                  defaultValue={day}
-                  size={'xs'}
-                  w={'20%'}
-                  mr={'2%'}
-                  ml={'5%'}
+                  choices={monthChoices}
+                />
+                <Text mt={'1%'} mr={'5%'} ml={'2%'}>
+                  月
+                </Text>
+                <DateSelect
+                  defaultValue={date.getDate()}
+                  width={'20%'}
                   onChange={inputDay}
-                >
-                  <option value="11">11</option>
-                  <option value="10">10</option>
-                  <option value="9">9</option>
-                </Select>
-                日
+                  choices={dayChoices}
+                />
+                <Text mt={'1%'} ml={'2%'}>
+                  日
+                </Text>
               </Flex>
             </FormControl>
             <FormControl>
@@ -130,7 +109,6 @@ export const IncomeExpenseModal: FC<Props> = memo((props) => {
                   color={'white'}
                   bg={'gray.300'}
                   size={'sm'}
-                  _hover={{ bg: 'cyan.600' }}
                   _active={{ bg: 'cyan.600' }}
                   onClick={() => {
                     setIncomeFlg(true);
@@ -144,7 +122,6 @@ export const IncomeExpenseModal: FC<Props> = memo((props) => {
                   color={'white'}
                   bg={'gray.300'}
                   size={'sm'}
-                  _hover={{ bg: 'cyan.600' }}
                   _active={{ bg: 'cyan.600' }}
                   onClick={() => {
                     setIncomeFlg(false);
@@ -207,3 +184,17 @@ export const IncomeExpenseModal: FC<Props> = memo((props) => {
     </Modal>
   );
 });
+
+const yearChoices = (year: number) => {
+  return [year + 1, year, year - 1];
+};
+
+const monthChoices = Array.from(
+  { length: 12 },
+  (_, index) => index + 1
+).reverse();
+
+const dayChoices = Array.from(
+  { length: 31 },
+  (_, index) => index + 1
+).reverse();
