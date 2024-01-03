@@ -25,8 +25,9 @@ class IncomeExpense < ApplicationRecord
     private
 
     # 必要な情報をフィルタリング
-    def filter_income_expenses(user, date_range, categories)
-      filtered_income_expenses = where(user:, date: date_range, category: categories).order(date: :desc)
+    def filter_income_expenses(user, date_range, category)
+      filtered_income_expenses = preload(:category).where(user:, date: date_range, category:).order(date: :desc)
+
       filtered_income_expenses.map do |income_expense|
         {
           id: income_expense.id,
