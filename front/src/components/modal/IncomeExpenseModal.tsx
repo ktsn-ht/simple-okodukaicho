@@ -1,8 +1,21 @@
 import React, { FC, memo, useState } from 'react';
 
 import {
-    Button, Flex, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent,
-    ModalFooter, ModalHeader, ModalOverlay, Select, Stack, Text
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Stack,
+  Text,
 } from '@chakra-ui/react';
 
 import { useEnterKey } from '../../hooks/useEnterKey';
@@ -186,15 +199,7 @@ export const IncomeExpenseModal: FC<Props> = memo((props) => {
 });
 
 const yearChoices = (year: number) => {
-  return [year + 1, year, year - 1];
+  return [year - 1, year, year + 1];
 };
-
-const monthChoices = Array.from(
-  { length: 12 },
-  (_, index) => index + 1
-).reverse();
-
-const dayChoices = Array.from(
-  { length: 31 },
-  (_, index) => index + 1
-).reverse();
+const monthChoices = Array.from({ length: 12 }, (_, index) => index + 1);
+const dayChoices = Array.from({ length: 31 }, (_, index) => index + 1);
