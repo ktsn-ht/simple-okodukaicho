@@ -1,18 +1,11 @@
-import {
-    Box,
-    Button,
-    FormControl,
-    FormHelperText,
-    FormLabel,
-    Input,
-    Stack,
-    Switch,
-    useDisclosure
-} from '@chakra-ui/react';
 import { ChangeEvent, FC, memo, useState } from 'react';
 
+import {
+    Box, Button, FormControl, FormHelperText, FormLabel, Input, Stack, Switch, useDisclosure
+} from '@chakra-ui/react';
+
 import { ConfirmationModal } from '../components/modal/ConfirmationModal';
-import { useRegistAccount } from '../hooks/useRegistAccount';
+import { useRegisterAccount } from '../hooks/useRegisterAccount';
 
 export const SignUp: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,10 +27,10 @@ export const SignUp: FC = memo(() => {
   const onChangeShowNewPassword = (e: ChangeEvent<HTMLInputElement>) =>
     setShowNewPassword(e.target.checked);
 
-  const { registAccount } = useRegistAccount();
+  const { registerAccount } = useRegisterAccount();
 
-  const onClickRegistAccount = () =>
-    registAccount({
+  const onClickRegisterAccount = () =>
+    registerAccount({
       userId: userId,
       password: password,
       newPassword: newPassword,
@@ -104,7 +97,7 @@ export const SignUp: FC = memo(() => {
       <ConfirmationModal
         isOpen={isOpen}
         onClose={onClose}
-        confirm={onClickRegistAccount}
+        confirm={onClickRegisterAccount}
       />
     </>
   );

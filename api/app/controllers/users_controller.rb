@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     raise StandardError unless @user&.authenticate(params[:password])
 
     # 本登録
-    @user.regist!(params)
+    @user.register!(params)
 
     render json: update_ok_response, status: :ok
   rescue ActiveRecord::RecordInvalid => e

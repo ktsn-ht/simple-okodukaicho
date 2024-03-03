@@ -1,8 +1,9 @@
-import { putUsers } from '../api/requests/users';
-import { useMessage } from './useMessage';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
+
+import { putUsers } from '../api/requests/users';
 import { userState } from '../store/userState';
+import { useMessage } from './useMessage';
 
 type Props = {
   userId: string;
@@ -11,13 +12,13 @@ type Props = {
   onClose: () => void;
 };
 
-export const useRegistAccount = () => {
+export const useRegisterAccount = () => {
   const navigate = useNavigate();
   const { showMessage } = useMessage();
 
   const setUserInfo = useSetRecoilState(userState);
 
-  const registAccount = (props: Props) => {
+  const registerAccount = (props: Props) => {
     const { userId, password, newPassword, onClose } = props;
 
     if (userId === '' || password === '' || newPassword === '') {
@@ -57,5 +58,5 @@ export const useRegistAccount = () => {
       });
   };
 
-  return { registAccount };
+  return { registerAccount };
 };

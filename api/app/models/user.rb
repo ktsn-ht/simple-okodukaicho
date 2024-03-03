@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_secure_password
 
   # 本登録
-  def regist!(params)
+  def register!(params)
     # ユーザーID・パスワード・仮登録フラグの更新
     update!(
       user_id: params[:user_id],
