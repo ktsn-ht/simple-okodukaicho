@@ -11,8 +11,9 @@ class IncomeExpensesController < ApplicationController
     raise StandardError if category.nil?
 
     IncomeExpense.create!(amount: params[:amount], date: params[:date], memo: params[:memo], user: @user, category:)
+    income_expenses, incomes, expenses = IncomeExpense.search(@user, params[:date])
 
-    render json: { message: 'create income_expense succeeded' }, status: :ok
+    render json: { income_expenses:, incomes:, expenses: }
   rescue ActiveRecord::RecordInvalid
     render json: { message: 'income_expense params invalid' }, status: :bad_request
   rescue StandardError
