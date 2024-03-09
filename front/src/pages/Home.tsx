@@ -1,50 +1,22 @@
+import { FC, memo, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+
 import {
-    Box,
-    Button,
-    Flex,
-    Heading,
-    Stack,
-    Tab,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
-    useDisclosure
+    Box, Button, Flex, Heading, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure
 } from '@chakra-ui/react';
-import { FC, memo, useEffect, useState } from 'react';
 
 import { IncomeExpenseModal } from '../components/modal/IncomeExpenseModal';
 import { IncomeExpenseTable } from '../components/table/IncomeExpenseTable';
-import { getIncomeExpenses } from '../api/requests/incomeExpenses';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../store/userState';
+import { incomeExpenseState } from '../store/incomeExpenseState';
 
 export const Home: FC = memo(() => {
   const date = new Date();
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth() + 1);
 
-  const userInfo = useRecoilValue(userState);
+  const incomeExpenseInfo = useRecoilValue(incomeExpenseState);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [incomeExpenses, setIncomeExpenses] = useState([]);
-  const [incomes, setIncomes] = useState([]);
-  const [expenses, setExpenses] = useState([]);
-
-  useEffect(() => {
-    getIncomeExpenses({
-      params: {
-        date: `${year}-${month}-1`,
-      },
-    })
-      .then((res) => {
-        setIncomeExpenses(res.data.incomeExpenses);
-        setIncomes(res.data.incomes);
-        setExpenses(res.data.expenses);
-      })
-      .catch();
-  }, [year, month, userInfo]);
 
   return (
     <>
@@ -74,13 +46,19 @@ export const Home: FC = memo(() => {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <IncomeExpenseTable incomeExpenses={incomeExpenses} />
+                <IncomeExpenseTable
+                  incomeExpenses={incomeExpenseInfo.incomeExpenses}
+                />
               </TabPanel>
               <TabPanel>
-                <IncomeExpenseTable incomeExpenses={incomes} />
+                <IncomeExpenseTable
+                  incomeExpenses={incomeExpenseInfo.incomes}
+                />
               </TabPanel>
               <TabPanel>
-                <IncomeExpenseTable incomeExpenses={expenses} />
+                <IncomeExpenseTable
+                  incomeExpenses={incomeExpenseInfo.expenses}
+                />
               </TabPanel>
             </TabPanels>
           </Tabs>
